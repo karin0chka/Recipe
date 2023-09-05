@@ -1,12 +1,13 @@
 import { createSlice} from "@reduxjs/toolkit";
+import { RootState } from "../app/store";
 
 //interface - abstract type that tells the compiler which propertynames a giver object can have
-interface AuthState {
+interface IAuthState {
   isAuthenticated: boolean;
 }
 
 //My initial state that user is not log in
-const initialState: AuthState = {
+const initialState: IAuthState = {
   isAuthenticated: false,
 };
 
@@ -22,8 +23,10 @@ const authSlice = createSlice({
     logOut: (state) => {
       state.isAuthenticated = false;
     },
+
   },
 });
 
 export const { logIn, logOut } = authSlice.actions;
+export const authentication = (state: RootState) => state.auth.isAuthenticated
 export default authSlice.reducer;
