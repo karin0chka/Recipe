@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import React,{ useState } from 'react'
 import { logIn } from './slices/authSlice'
-import { useAppDispatch,useAppSelector } from './app/hooks'
+import { useAppDispatch, useAppSelector } from './app/hooks'
 import { registrationSuccess, registrationFailure } from './slices/regitrationSlice'
-import   Logout  from './Logout'
+import Logout from './Logout'
 
 export default function Registration() {
     const [username, setUsername] = useState('')
@@ -52,7 +52,7 @@ export default function Registration() {
         <>
             <h2>Register to cook with us</h2>
             {isRegistered ? (<p>Good to have you here!<br />
-            <Logout />
+                <Logout />
             </p>) : (registrationForm())}
         </>
     )
