@@ -1,0 +1,25 @@
+@font-face {
+    font-family: "bold";
+    src: local("airbnb-cereal-app-bold"),
+    url("./fonts/airbnb-cereal-app-bold.ttf") format("truetype")
+}
+@font-face {
+    font-family: "bold";
+    src: local("airbnb-cereal-app-book"),
+    url("./fonts/airbnb-cereal-app-book.ttf") format("truetype")
+}
+@font-face {
+    font-family: "bold";
+    src: local("airbnb-cereal-app-extrabold"),
+    url("./fonts/airbnb-cereal-app-extrabold.ttf") format("truetype")
+}
+@font-face {
+    font-family: "bold";
+    src: local("airbnb-cereal-app-light"),
+    url("./fonts/airbnb-cereal-app-light.ttf") format("truetype")
+}
+@font-face {
+    font-family: "bold";
+    src: local("airbnb-cereal-app-medium"),
+    url("./fonts/airbnb-cereal-app-medium.ttf") format("truetype")
+}
