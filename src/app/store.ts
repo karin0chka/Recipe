@@ -1,23 +1,33 @@
-import { configureStore } from '@reduxjs/toolkit'
-import authReducer from '../slices/authSlice'
-import registrationReducer from '../slices/regitrationSlice'
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import authSlice, { IInitialStore } from './store/slices/authSlice'; // Import IInitialStore from your authSlice file
 
-//file where all off my application state is stored
+// Redux Persist configuration
+const persistConfig = {
+  key: 'root',
+  storage,
+  // Add any blacklist or whitelist options if needed
+};
 
-//combineRedusers - root reducer for combining multiple reducers
+// Create a persisted reducer
+const persistedReducer = persistReducer(persistConfig, {
+  auth: authSlice,
+  // Add other reducers as needed
+});
+
+// Configure the Redux store with the persisted reducer
 const store = configureStore({
-    reducer: {
-        auth: authReducer,
-        registration:registrationReducer,
-    }
-})
+  reducer: persistedReducer,
+  // Add other reducers as needed
+});
 
+// Create a persisted store
+const persistor = persistStore(store);
 
-// types for help TypeScript understand my store
-//Infer the 'RootState` and `AppDispatch` types from the store
-// type of entire Redux store
-export type RootState = ReturnType<typeof store.getState>
-//Inferred type:{auth:authReducer...}
-//type of stores dispatch function
-export type AppDispatch = typeof store.dispatch
-export default store
+export { store, persistor };
+
+// Define the RootState type for the store
+export type RootState = ReturnType<typeof store.getState>;
+// Define the AppDispatch type for the store
+export type AppDispatch = typeof store.dispatch;
