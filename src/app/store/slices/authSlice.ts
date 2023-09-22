@@ -13,7 +13,7 @@ interface IInitialStore {
 const initialState: IInitialStore = {
   listOfUsers: [
     {
-      id: "123123",
+      id: nanoid(),
       username: "testing",
       password: "testing",
       email: "testing",
@@ -303,7 +303,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     loginUser: (state, action) => {
-      console.log(action);
       const { email, password } = action.payload;
       const user = state.listOfUsers.find(
         (user) => user.email.toLowerCase() === email.toLowerCase()
@@ -311,14 +310,11 @@ export const authSlice = createSlice({
       if (!user) return;
       if (user.password !== password) return;
       state.isAuthenticated = user;
-      localStorage.setItem("isAuthenticated", JSON.stringify(user));
     },
     logoutUser: (state) => {
       state.isAuthenticated = null;
-      localStorage.setItem("isAuthenticated", JSON.stringify(null));
     },
     registerUser: (state, action) => {
-      console.log(action);
       const { username, email, password } = action.payload;
       const registerNewEmail = state.listOfUsers.find(
         (newUser) => newUser.email.toLocaleLowerCase() !== email.toLowerCase()
@@ -340,10 +336,8 @@ export const authSlice = createSlice({
       };
       state.listOfUsers.push(userDto);
       state.isAuthenticated = userDto;
-      localStorage.setItem("listOfUsers", JSON.stringify(userDto));
-      localStorage.setItem("isAuthenticated", JSON.stringify(userDto));
     },
-    addRecepi: (state, action) => {
+    addRecepie: (state, action) => {
       console.log(action);
       const { img, title, description, ingridients } = action.payload;
       let id = "";
@@ -358,39 +352,40 @@ export const authSlice = createSlice({
         ingridients,
       };
       state.listOfResepies.push(newRecepi);
-      localStorage.setItem("listOfResepies", JSON.stringify(newRecepi));
     },
-    loadFromLocal: (state, _) => {
-      try {
-        const listOfUsers = JSON.parse(
-          localStorage.getItem("listOfUsers") || "[]"
-        );
-        state.listOfUsers = listOfUsers;
-        console.log(listOfUsers)
-      } catch (error) {
-        console.log(error);
-      }
-
-      try {
-        const isAuthenticated = JSON.parse(
-          localStorage.getItem("isAuthenticated") || "null"
-        );
-        state.isAuthenticated = isAuthenticated;
-      } catch (error) {
-        console.log(error);
-      }
-
-      try {
-        const listOfResepies = JSON.parse(
-          localStorage.getItem("listOfResepies") || "[]"
-        );
-        state.listOfResepies = listOfResepies;
-      } catch (error) {
-        console.log(error);
-      }
+    addFavoriteRec: (state, action) => {
+      const { id, recipeId } = action.payload;
+      const userIndex = state.listOfUsers.findIndex((u) => u.id === id);
+      const findRecipe = state.listOfResepies.find((r) => r.id === recipeId);
+      if (state.isAuthenticated !== null)
+        if (
+          userIndex >= 0 &&
+          findRecipe &&
+          !state.listOfUsers[userIndex].favorite.includes(findRecipe.id)
+        ) {
+          state.listOfUsers[userIndex].favorite.push(recipeId);
+          state.isAuthenticated.favorite.push(recipeId);
+        }
+    },
+    deleteFavoriteRec: (state, action) => {
+      const { id, recipeId } = action.payload;
+      const userIndex = state.listOfUsers.findIndex((u) => u.id === id);
+      const recipeIndex = state.listOfResepies.findIndex(
+        (r) => r.id === recipeId
+      );
+      if (state.isAuthenticated !== null)
+        if (
+          userIndex >= 0 &&
+          recipeIndex >= 0 &&
+          state.listOfUsers[userIndex].favorite.includes(recipeId)
+        ) {
+          state.listOfUsers[userIndex].favorite.splice(recipeIndex, 1);
+          state.isAuthenticated.favorite = state.isAuthenticated.favorite
+        }
     },
   },
 });
-export const { loginUser, registerUser,addRecepi, loadFromLocal } = authSlice.actions;
+export const { loginUser, registerUser, addRecepie, addFavoriteRec, deleteFavoriteRec  } =
+  authSlice.actions;
 
 export default authSlice.reducer;

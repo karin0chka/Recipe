@@ -1,25 +1,24 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import authSlice, { IInitialStore } from './store/slices/authSlice'; // Import IInitialStore from your authSlice file
+// reduxStore.ts
+import { configureStore } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import authSlice from "./store/slices/authSlice"; // Import authSlice
+import thunk from 'redux-thunk';
 
 // Redux Persist configuration
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
   // Add any blacklist or whitelist options if needed
 };
 
 // Create a persisted reducer
-const persistedReducer = persistReducer(persistConfig, {
-  auth: authSlice,
-  // Add other reducers as needed
-});
+const persistedReducer = persistReducer(persistConfig, authSlice);
 
 // Configure the Redux store with the persisted reducer
 const store = configureStore({
   reducer: persistedReducer,
-  // Add other reducers as needed
+  middleware: [thunk]
 });
 
 // Create a persisted store

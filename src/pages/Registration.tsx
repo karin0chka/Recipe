@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { useAppDispatch } from '../app/hooks'
 import { registerUser } from '../app/store/slices/actions'
 import './registration.css'
+import { useDispatch } from 'react-redux'
 
 
 export default function Registration() {
@@ -12,7 +12,7 @@ export default function Registration() {
 
     // dispatch is the fundamental method of updaiting a Redux store state
     //also to dispatch action
-    const dispatch = useAppDispatch()
+    const dispatch = useDispatch()
     //useSelector to read data from store
 
     function handleRegistration(e: React.FormEvent<HTMLFormElement>) {

@@ -8,13 +8,21 @@ export const loginUser = createAction('auth/loginUser', (email, password) => {
 export const registerUser = createAction('auth/registerUser', (username, email, password) => {
   return { payload: { username, email, password } };
 });
-export const addRecepi = createAction('auth/addRecepi', ( img, title, description, ingridients) => {
+export const addRecepie = createAction('auth/addRecepi', ( img, title, description, ingridients) => {
   return { payload: { img, title, description, ingridients } };
 });
 export const loadFromLocal = createAction('auth/loadFromLocal', () => {
-  console.log('action')
   return { payload: {} };
 });
+export const addFavoriteRec = createAction('auth/addFavoriteRec', (id, recipeId) => {
+  console.log('action')
+  return { payload: { id, recipeId } };
+});
+export const deleteFavoriteRec = createAction('auth/deleteFavoriteRec', (id, recipeId) => {
+  console.log('action')
+  return { payload: { id, recipeId } };
+});
+
 
 
 

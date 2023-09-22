@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { useAppDispatch } from '../app/hooks'
 import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../app/store/slices/actions'
 import './login.css'
+import { useDispatch } from 'react-redux'
 
 // dispatch is the fundamental method of updaiting a Redux store state
 
@@ -11,7 +11,7 @@ import './login.css'
 export default function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const dispatch = useAppDispatch()
+    const dispatch = useDispatch()
 
     const navigate = useNavigate()
 

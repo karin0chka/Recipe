@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 
 // Select the entire auth state
-const selectAuthState = (state) => state.auth;
+const selectAuthState = (state) => state;
 
 // Create a selector to get the authenticated user
 export const selectAuthenticatedUser = createSelector(
