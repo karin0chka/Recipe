@@ -14,3 +14,9 @@ export interface IRecepie{
     description:string;
     ingridients:string[];
 }
+
+export interface IInitialStore {
+    listOfUsers: IUser[];
+    isAuthenticated: null | IUser;
+    listOfResepies: IRecepie[];
+  }

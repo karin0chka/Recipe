@@ -1,7 +1,8 @@
-import { createSelector } from '@reduxjs/toolkit';
+import { createSelector } from "@reduxjs/toolkit";
+import { IInitialStore } from "../../../interfaces/interfaces";
 
 // Select the entire auth state
-const selectAuthState = (state) => state;
+const selectAuthState = (state: IInitialStore) => state;
 
 // Create a selector to get the authenticated user
 export const selectAuthenticatedUser = createSelector(

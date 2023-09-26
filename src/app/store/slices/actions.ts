@@ -15,11 +15,11 @@ export const loadFromLocal = createAction('auth/loadFromLocal', () => {
   return { payload: {} };
 });
 export const addFavoriteRec = createAction('auth/addFavoriteRec', (id, recipeId) => {
-  console.log('action')
+  console.log('actionAdd')
   return { payload: { id, recipeId } };
 });
 export const deleteFavoriteRec = createAction('auth/deleteFavoriteRec', (id, recipeId) => {
-  console.log('action')
+  console.log('actionDel')
   return { payload: { id, recipeId } };
 });
 

@@ -1,14 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IUser } from "../../../interfaces/interfaces";
+import { IInitialStore, IUser } from "../../../interfaces/interfaces";
 import { IRecepie } from "../../../interfaces/interfaces";
 import { useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
 
-interface IInitialStore {
-  listOfUsers: IUser[];
-  isAuthenticated: null | IUser;
-  listOfResepies: IRecepie[];
-}
 
 const initialState: IInitialStore = {
   listOfUsers: [
@@ -368,6 +363,7 @@ export const authSlice = createSlice({
         }
     },
     deleteFavoriteRec: (state, action) => {
+      console.log('asd')
       const { id, recipeId } = action.payload;
       const userIndex = state.listOfUsers.findIndex((u) => u.id === id);
       const recipeIndex = state.listOfResepies.findIndex(
@@ -380,7 +376,7 @@ export const authSlice = createSlice({
           state.listOfUsers[userIndex].favorite.includes(recipeId)
         ) {
           state.listOfUsers[userIndex].favorite.splice(recipeIndex, 1);
-          state.isAuthenticated.favorite = state.isAuthenticated.favorite
+          state.isAuthenticated.favorite = state.listOfUsers[userIndex].favorite
         }
     },
   },

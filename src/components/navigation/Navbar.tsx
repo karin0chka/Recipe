@@ -59,7 +59,7 @@ export default function Header() {
                     </section>
                     <em className="navSiteName">Tasty&Zesty</em>
                     <div className="sideLinkNav">
-                        <Link to="/">Favorite</Link>
+                        <Link to="/favorite">Favorite</Link>
                     </div>
                 </div>
             </>
