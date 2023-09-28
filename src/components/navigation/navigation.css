@@ -42,57 +42,67 @@ body {
   text-shadow: -1px 0 rgb(136, 179, 151), 0 1px rgb(43, 70, 53),
     1px 0 rgb(43, 70, 53), 0 -1px rgb(43, 70, 53);
 }
-.navTitle{
-    display: flex;
-    align-items: center;
-    gap:5px
+.navTitle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
-.navPintedInfo{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+.navPintedInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
-.navLogIn{
+.navLogIn {
   font-family: europa-boldregular, sans-serif;
   text-decoration: none;
-  background-color:  #3a9691;
+  background-color: #3a9691;
   color: white;
   font-size: 15px;
   border-radius: 22px;
   border: none;
   padding: 14px;
   cursor: pointer;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
-.navLogoutBtn{
-  color:rgb(213, 206, 206);
+.navLogoutBtn {
+  color: rgb(213, 206, 206);
   background-color: rgb(192, 7, 7);
   border-style: hidden;
   border-radius: 23px;
   padding: 8px;
   font-size: 20px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  width: 30%;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  width: 90px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-.sideNav {
-  display: flex;
-  flex-direction: column;
+
+.sideNav{
+  display: grid;
+  grid-template-rows: 60px 50px 100px auto 100px;
   align-items: center;
+  justify-content: center;
   background: #ffffff;
   border-right: 1px solid #e5e5e5;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   height: 100%;
   left: 0;
-  width: 200px;
   overflow: hidden;
   transition: width 0.05s linear;
-  z-index: 1000;
+  z-index: 2;
+  padding: 0px;
 }
-.sideNav a {
+.siteNameSideBar{
+  padding: 15px;
+}
+.sideLinkNav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 20px;
@@ -100,13 +110,12 @@ body {
   display: block;
   transform: 0, 3s;
 }
-
-
 .sideNav a:hover {
   color: rgb(20, 121, 87);
 }
 .sideNavCloseBth {
-  padding: 19px;
+  display: block;
+  margin: 0 auto;
   width: 50px;
   height: 50px;
   cursor: pointer;
@@ -144,7 +153,7 @@ body {
   opacity: 0;
 }
 .sideNavClose {
-  margin: 60px 0 0 5px;
+  margin: 50px 0 0 5px;
   position: absolute;
 }
 
@@ -158,4 +167,29 @@ body {
 }
 .sideNavCloseBth:hover label {
   opacity: 1;
+}
+.footerForSideNav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: #d8d0d0;
+  height: 100%;
+  width: 100%;
+  box-shadow:5px 5px 8px;
+}
+
+@media (max-width: 1000px) {
+  .navNavigation {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    /* align-items: center; */
+  }
+
+  
 }

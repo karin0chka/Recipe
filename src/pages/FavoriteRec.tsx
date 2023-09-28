@@ -14,15 +14,21 @@ export default function FavoriteRec() {
 
     const listOfFavorites = useMemo(() => listOfRecipes.filter((recp) => user?.favorite.includes(recp.id)), [user?.favorite, listOfRecipes])
     console.log(listOfFavorites)
-
     return (
 
         <div className="favoriteListWrapper">
+            <h1 className="favPageTitle">
+            <img height="90" width="100" src="/public/icons/fav-icon.png" />
+            <br />
+            My recipes
+            </h1>
             {
                 listOfFavorites.map((card) => {
                     return (
                         <div className="favoriteCard"  key={card.id}>
-                            <RecepieCard recepie={card} />
+                            <section className="informWrapper">
+                            <RecepieCard recepie={card} />       
+                            </section>
                         </div>
                     )
                 })

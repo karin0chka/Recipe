@@ -27,10 +27,15 @@ body {
   border:solid rgb(241, 239, 239);
   border-radius: 15px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  background-image:linear-gradient(rgba(236, 229, 229, 0.5), rgba(248, 233, 233, 0.5)), url(./img/back.jpg);
+  background-image:linear-gradient(rgba(236, 229, 229, 0.5), rgba(248, 233, 233, 0.5)), url(./img/background.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
+}
+.registerFrame a{
+  text-decoration: none;
+  color:#336c6a;
+  font-size: 20px;
 }
 
 .registerFrame input{
@@ -76,4 +81,18 @@ body {
   background-repeat: no-repeat;
   background-size: 50px 50px;
 
+}
+
+
+@media (max-width: 1000px) {
+  .registerFrame{
+    width:90%;
+    height: 90%;
+  }
+  .registerFormTitle{
+    text-align: center;
+  }
+  .registerFrame input{
+    width: 90%;
+  } 
 }

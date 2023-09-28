@@ -21,7 +21,7 @@ export default function RecepieCard(props: { recepie: IRecepie }) {
     }
 
     function handeleFavorite() {
-        if(!user) return
+        if (!user) return
         const isRecipeInFavorites = user.favorite.includes(props.recepie.id)
         if (!isRecipeInFavorites) {
             dispatch(addFavoriteRec(user.id, props.recepie.id))
@@ -55,8 +55,6 @@ export default function RecepieCard(props: { recepie: IRecepie }) {
                     {showMore ? 'Read less' : 'Read more'}
                 </button>
             </div>
-
-
         </div>
 
     )

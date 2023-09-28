@@ -12,6 +12,7 @@ export default function Homepage() {
     return (
         <>
             <div className="homePageCardContainer">
+                
                 {
                     recipe.map((card: IRecepie) => {
                         return (

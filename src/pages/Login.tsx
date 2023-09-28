@@ -20,6 +20,9 @@ export default function Login() {
         dispatch(loginUser(email, password))
         navigate("/")
     }
+    function openRegistrationPage() {
+        navigate("/register")
+    }
 
 
 
@@ -30,13 +33,16 @@ export default function Login() {
                 <form onSubmit={handleLogin} className='loginFrame'>
                     <input className='loginEmailInput' type="text" value={email} onChange={event => setEmail(event.target.value)} />
                     <input className='loginPasswordInput' type="password" value={password} onChange={event => setPassword(event.target.value)} />
-
+                    <a href="#" onClick={openRegistrationPage}>
+                        I don't have an account
+                    </a>
                     <button className='loginBtn ' type="submit" >Login</button>
+
                 </form>
             </section>
         </>
 
-    
+
 
     )
 }

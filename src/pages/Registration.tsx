@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { registerUser } from '../app/store/slices/actions'
 import './registration.css'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Registration() {
@@ -12,6 +13,7 @@ export default function Registration() {
 
     // dispatch is the fundamental method of updaiting a Redux store state
     //also to dispatch action
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     //useSelector to read data from store
 
@@ -24,6 +26,10 @@ export default function Registration() {
         }
     }
 
+    function openLoginPage() {
+        navigate("/login")
+    }
+
     return (
         <>
             <section className='registerWrapper'>
@@ -34,9 +40,12 @@ export default function Registration() {
 
                     <input className='registerEmailInput' type="email" placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
 
-                    <input  className='registerPasswordInput' type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input className='registerPasswordInput' type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
 
                     <input className='registerPasswordInput' type="password" placeholder='Repeat your password' value={repetedPassword} onChange={(e) => setRepetedPassword(e.target.value)} />
+                    <a href="#" onClick={openLoginPage}>
+                        Already have an account
+                    </a>
 
                     <button className="registerFormSubmit" type="submit">Create account</button>
                 </form>
