@@ -47,7 +47,6 @@ export default function Header() {
                             <div className="navMenuButtonBar3"></div>
                         </section>
                         <Link to="/" className="navSiteName">
-                        <img height="45" src="/public/icons/title-icon (2).png" />
                         <em>Tasty&Zesty</em></Link>
                     </div>
                     <div className="navTakeSpace"></div>

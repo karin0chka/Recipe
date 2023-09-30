@@ -1,7 +1,5 @@
 import React, { useMemo } from "react"
-import { IRecepie, IUser } from "../interfaces/interfaces"
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from "react-router-dom"
+import { useSelector } from 'react-redux'
 import RecepieCard from "./RecepieCard"
 import "./favorite.css"
 import { selectAuthenticatedUser, selectListOfRecipes } from "../app/store/slices/selectors"
@@ -13,7 +11,6 @@ export default function FavoriteRec() {
     const listOfRecipes = useSelector(selectListOfRecipes)
 
     const listOfFavorites = useMemo(() => listOfRecipes.filter((recp) => user?.favorite.includes(recp.id)), [user?.favorite, listOfRecipes])
-    console.log(listOfFavorites)
     return (
 
         <div className="favoriteListWrapper">
