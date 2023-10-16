@@ -1,3 +1,4 @@
+import { RootState } from './../../store';
 import { createSlice } from "@reduxjs/toolkit";
 import { IInitialStore, IUser } from "../../../interfaces/interfaces";
 import { IRecepie } from "../../../interfaces/interfaces";
@@ -293,18 +294,28 @@ const initialState: IInitialStore = {
     },
   ],
 };
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    loginUser: (state, action) => {
-      const { email, password } = action.payload;
-      const user = state.listOfUsers.find(
-        (user) => user.email.toLowerCase() === email.toLowerCase()
-      );
-      if (!user) return;
-      if (user.password !== password) return;
-      state.isAuthenticated = user;
+    // loginUser: (state, action) => {
+       // const { email, password } = action.payload;
+      // const user = state.listOfUsers.find(
+       //   (user) => user.email.toLowerCase() === email.toLowerCase()
+       // );
+       // if (!user) return;
+     // if (user.password !== password) return;
+    //   state.isAuthenticated = action.payload
+    // },
+    loginEmailFailure:(state, action) => {
+      state.isAuthenticated = action.payload;
+    },
+    loginPasswordFailure:(state,action) => {
+      state.isAuthenticated = action.payload;
+    },
+    loginUser:(state, action) => {
+      state.isAuthenticated = action.payload;
     },
     logoutUser: (state) => {
       state.isAuthenticated = null;
@@ -385,3 +396,5 @@ export const { loginUser, registerUser, addRecepie, addFavoriteRec, deleteFavori
   authSlice.actions;
 
 export default authSlice.reducer;
+
+
