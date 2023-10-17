@@ -17,7 +17,6 @@ export default function Header() {
     const navigation = useNavigate()
     const dispatch = useDispatch();
 
-
     function handleLogout(event: React.MouseEvent<HTMLButtonElement>) {
             event.preventDefault()
             if(isAuth){

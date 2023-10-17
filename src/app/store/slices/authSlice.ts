@@ -1,10 +1,9 @@
-import { RootState } from './../../store';
-import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "./../../store";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IInitialStore, IUser } from "../../../interfaces/interfaces";
 import { IRecepie } from "../../../interfaces/interfaces";
 import { useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
-
 
 const initialState: IInitialStore = {
   listOfUsers: [
@@ -299,82 +298,25 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    // loginUser: (state, action) => {
-       // const { email, password } = action.payload;
-      // const user = state.listOfUsers.find(
-       //   (user) => user.email.toLowerCase() === email.toLowerCase()
-       // );
-       // if (!user) return;
-     // if (user.password !== password) return;
-    //   state.isAuthenticated = action.payload
-    // },
-    loginEmailFailure:(state, action) => {
-      state.isAuthenticated = action.payload;
-    },
-    loginPasswordFailure:(state,action) => {
-      state.isAuthenticated = action.payload;
-    },
-    loginUser:(state, action) => {
-      state.isAuthenticated = action.payload;
+    loginUser: (state, action) => {
+      state.isAuthenticated = action.payload
     },
     logoutUser: (state) => {
       state.isAuthenticated = null;
     },
     registerUser: (state, action) => {
-      const { username, email, password } = action.payload;
-      const registerNewEmail = state.listOfUsers.find(
-        (newUser) => newUser.email.toLocaleLowerCase() !== email.toLowerCase()
-      );
-
-      if (!registerNewEmail) return;
-      let id = "";
-      do {
-        id = nanoid();
-      } while (state.listOfUsers.find((u) => u.id === id));
-
-      const userDto: IUser = {
-        id,
-        username,
-        password,
-        email,
-        favorite: [],
-        type: "client",
-      };
-      state.listOfUsers.push(userDto);
-      state.isAuthenticated = userDto;
+      state.listOfUsers.push(action.payload);
     },
     addRecepie: (state, action) => {
-      console.log(action);
-      const { img, title, description, ingridients } = action.payload;
-      let id = "";
-      do {
-        id = nanoid();
-      } while (state.listOfResepies.find((res) => res.id === id));
-      const newRecepi: IRecepie = {
-        id,
-        img,
-        title,
-        description,
-        ingridients,
-      };
-      state.listOfResepies.push(newRecepi);
+      state.listOfResepies.push(action.payload);
     },
     addFavoriteRec: (state, action) => {
-      const { id, recipeId } = action.payload;
-      const userIndex = state.listOfUsers.findIndex((u) => u.id === id);
-      const findRecipe = state.listOfResepies.find((r) => r.id === recipeId);
-      if (state.isAuthenticated !== null)
-        if (
-          userIndex >= 0 &&
-          findRecipe &&
-          !state.listOfUsers[userIndex].favorite.includes(findRecipe.id)
-        ) {
           state.listOfUsers[userIndex].favorite.push(recipeId);
           state.isAuthenticated.favorite.push(recipeId);
-        }
+        
     },
     deleteFavoriteRec: (state, action) => {
-      console.log('asd')
+      console.log("asd");
       const { id, recipeId } = action.payload;
       const userIndex = state.listOfUsers.findIndex((u) => u.id === id);
       const recipeIndex = state.listOfResepies.findIndex(
@@ -387,14 +329,18 @@ export const authSlice = createSlice({
           state.listOfUsers[userIndex].favorite.includes(recipeId)
         ) {
           state.listOfUsers[userIndex].favorite.splice(recipeIndex, 1);
-          state.isAuthenticated.favorite = state.listOfUsers[userIndex].favorite
+          state.isAuthenticated.favorite =
+            state.listOfUsers[userIndex].favorite;
         }
     },
   },
 });
-export const { loginUser, registerUser, addRecepie, addFavoriteRec, deleteFavoriteRec  } =
-  authSlice.actions;
+export const {
+  loginUser,
+  registerUser,
+  addRecepie,
+  addFavoriteRec,
+  deleteFavoriteRec,
+} = authSlice.actions;
 
 export default authSlice.reducer;
-
-

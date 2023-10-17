@@ -39,7 +39,7 @@ export default function RecepieCard(props: { recepie: IRecepie }) {
                 {
                     user &&
                     <div className="heartPlacement">
-                        <div className={`heartBut ${user.favorite.includes(props.recepie.id) ? 'is-active' : ''}`} onClick={handeleFavorite}></div>
+                        <div className={`heartBut ${user.favorite?.includes(props.recepie.id) ? 'is-active' : ''}`} onClick={handeleFavorite}></div>
                     </div>
                 }
             </section>
