@@ -1,9 +1,6 @@
-import { RootState } from "./../../store";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IInitialStore, IUser } from "../../../interfaces/interfaces";
-import { IRecepie } from "../../../interfaces/interfaces";
-import { useNavigate } from "react-router-dom";
+import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
+import { IInitialStore } from "../../../interfaces/interfaces";
 
 const initialState: IInitialStore = {
   listOfUsers: [
@@ -298,45 +295,55 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    loginUser: (state, action) => {
-      state.isAuthenticated = action.payload
+    loginUserFailure: (state) => {
+      console.log("dont login");
+      state.isAuthenticated = null;
+    },
+    loginUserSuccess: (state, action) => {
+      console.log("login");
+      state.isAuthenticated = action.payload;
     },
     logoutUser: (state) => {
       state.isAuthenticated = null;
     },
     registerUser: (state, action) => {
-      state.listOfUsers.push(action.payload);
+      console.log("user is register",action.payload);
+      state.listOfUsers.push(action.payload)
+      state.isAuthenticated = action.payload
+      console.log(state)
     },
     addRecepie: (state, action) => {
       state.listOfResepies.push(action.payload);
     },
     addFavoriteRec: (state, action) => {
-          state.listOfUsers[userIndex].favorite.push(recipeId);
-          state.isAuthenticated.favorite.push(recipeId);
-        
+      console.log("reducer added");
+      const { id, recipeId } = action.payload;
+      const userIndex = state.listOfUsers.findIndex((u) => u.id === id);
+      if (state.isAuthenticated !== null && userIndex >= 0) {
+        state.listOfUsers[userIndex].favorite.push(recipeId);
+        state.isAuthenticated.favorite.push(recipeId);
+      }
     },
     deleteFavoriteRec: (state, action) => {
-      console.log("asd");
+      console.log("asd", action.payload);
       const { id, recipeId } = action.payload;
       const userIndex = state.listOfUsers.findIndex((u) => u.id === id);
       const recipeIndex = state.listOfResepies.findIndex(
         (r) => r.id === recipeId
       );
-      if (state.isAuthenticated !== null)
-        if (
-          userIndex >= 0 &&
-          recipeIndex >= 0 &&
-          state.listOfUsers[userIndex].favorite.includes(recipeId)
-        ) {
-          state.listOfUsers[userIndex].favorite.splice(recipeIndex, 1);
-          state.isAuthenticated.favorite =
-            state.listOfUsers[userIndex].favorite;
-        }
+      const updatedFavorite = state.listOfUsers[userIndex].favorite.splice(
+        recipeIndex,
+        1
+      );
+      state.listOfUsers[userIndex].favorite = updatedFavorite;
+      if (state.isAuthenticated)
+        state.isAuthenticated.favorite = updatedFavorite;
     },
   },
 });
 export const {
-  loginUser,
+  loginUserFailure,
+  loginUserSuccess,
   registerUser,
   addRecepie,
   addFavoriteRec,

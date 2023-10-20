@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../app/hooks'
-import { loginUser } from '../app/store/slices/actions'
 import './login.css'
+import { loginUserThunk, loginUserlogic } from '../app/store/slices/actions'
+
 
 // dispatch is the fundamental method of updaiting a Redux store state
 
@@ -11,14 +12,15 @@ import './login.css'
 export default function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const dispatch = useAppDispatch();
 
+    const dispatch = useAppDispatch();
     const navigate = useNavigate()
 
-    function handleLogin(e: React.FormEvent) {
+    async function handleLogin(e: React.FormEvent) {
         e.preventDefault()
-        dispatch(loginUser(email,password))
-        navigate("/")
+
+        dispatch(loginUserlogic( email, password ));
+        navigate("/");
 
     }
     function openRegistrationPage() {
