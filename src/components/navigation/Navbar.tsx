@@ -18,12 +18,12 @@ export default function Header() {
     const dispatch = useDispatch();
 
     function handleLogout(event: React.MouseEvent<HTMLButtonElement>) {
-            event.preventDefault()
-            if(isAuth){
-                dispatch(logoutUser())
-                navigation('/login')
+        event.preventDefault()
+        if (isAuth) {
+            dispatch(logoutUser())
+            navigation('/login')
 
-            }
+        }
     }
 
     useEffect(() => {
@@ -45,8 +45,8 @@ export default function Header() {
                             <div className="navMenuButtonBar2"></div>
                             <div className="navMenuButtonBar3"></div>
                         </section>
-                        <Link to="/" className="navSiteName">
-                        <em>Tasty&Zesty</em></Link>
+                        <Link to="/" style={{ textDecoration: 'none' }}>
+                            <em className="navSiteName">Tasty&Zesty</em></Link>
                     </div>
                     <div className="navTakeSpace"></div>
                     <div className="navPintedInfo" >
@@ -64,8 +64,8 @@ export default function Header() {
             {
                 expandMenu &&
                 <>
-                    <div className="sideNav" onClick={closeMenu} >
-                        <section className="sideNavCloseBth" onClick={closeMenu}>
+                    <div className="sideNav" onClick={closeMenu}>
+                        <section className="sideNavCloseBth" onClick={closeMenu} >
                             <div className="sideNavLeftRigth"></div>
                             <div className="sideNavRightLeft"></div>
                             <label className="sideNavClose">close</label>
@@ -73,9 +73,9 @@ export default function Header() {
                         <div className="siteNameSideBar">
                             <em className="navSiteName">Tasty&Zesty</em>
                         </div>
-                        <div className="sideLinkNav">
-                            <Link to="/">Home page</Link>
-                            <Link to="/favorite">Favorite</Link>
+                        <div className="sideLinkNav" >
+                            <Link to="/" style={{ textDecoration: 'none' }}>Home page</Link>
+                            <Link to="/favorite" style={{ textDecoration: 'none' }}>Favorite</Link>
                         </div>
                         <div></div>
                         <section className="footerForSideNav">

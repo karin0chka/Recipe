@@ -4,6 +4,7 @@ import { selectListOfRecipes } from '../app/store/slices/selectors'
 import { IRecepie } from "../interfaces/interfaces"
 import RecepieCard from "./RecepieCard"
 import "./recepieCard.css"
+import AddRecipe from "../components/AddRecipe"
 
 
 export default function Homepage() {
@@ -11,6 +12,7 @@ export default function Homepage() {
 
     return (
         <>
+        <AddRecipe />
             <div className="homePageCardContainer">
                 
                 {

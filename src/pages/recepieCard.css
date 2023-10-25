@@ -14,7 +14,6 @@ body {
   padding: 20px;
   height: 100%;
   position: relative;
-
 }
 body::-webkit-scrollbar {
   width: 10px;
@@ -23,19 +22,24 @@ body::-webkit-scrollbar-track {
   background-color: rgb(214, 209, 209);
 }
 body::-webkit-scrollbar-thumb {
-  background-color:rgb(138, 136, 136);
+  background-color: rgb(138, 136, 136);
   border-radius: 100px;
 }
 
 .homePageCard {
   display: grid;
-  grid-template-rows: 220px 65px 150px;
+  grid-template-rows: 220px 86px 150px;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(229, 224, 224, 0.2),
     0 6px 20px 0 rgba(162, 160, 160, 0.19);
   padding: 10px;
   border-radius: 10px;
-  z-index:  1;
+  z-index: 1;
+}
+.likeRec .recepieTitle {
+  font-size: 20px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 .recepieImg {
   border-radius: 40%;
@@ -44,17 +48,18 @@ body::-webkit-scrollbar-thumb {
   align-items: center;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
-.likeRec{
-  display:flex;
+.likeRec {
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap:10px;
+
 }
-.heartBut{
-  width: 80px;
-  height: 80px;
-  background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+.heartBut {
+  width: 85px;
+  height: 100px;
+  background: url("https://cssanimation.rocks/images/posts/steps/heart.png")
+    no-repeat;
   background-position: 0 0;
   cursor: pointer;
   transition: background-position 1s steps(28);
@@ -79,7 +84,7 @@ body::-webkit-scrollbar-thumb {
   border-radius: 100px;
 }
 .listWrapper::-webkit-scrollbar-thumb {
-  background-color:rgb(138, 136, 136);
+  background-color: rgb(138, 136, 136);
   border-radius: 100px;
 }
 
@@ -108,18 +113,16 @@ body::-webkit-scrollbar-thumb {
 
 @media (max-width: 1000px) {
   .homePageCardContainer {
-    display:flex;
+    display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 20px;
     overflow: auto;
     height: 100%;
     position: relative;
-
   }
   .homePageCard {
     display: flex;
     flex-direction: column;
   }
 }
-

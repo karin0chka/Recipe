@@ -17,6 +17,16 @@ body {
     justify-content: center;
 }
 
+.favoriteListWrapper::-webkit-scrollbar {
+  width: 10px;
+}
+.favoriteListWrapper::-webkit-scrollbar-track {
+  background-color: rgb(214, 209, 209);
+}
+.favoriteListWrapper::-webkit-scrollbar-thumb {
+  background-color: rgb(138, 136, 136);
+  border-radius: 100px;
+}
 
 .favoriteListWrapper .recepieImg {
   display: block;
@@ -35,16 +45,6 @@ body {
   width:1500px;
 }
 
-.favoriteListWrapper::-webkit-scrollbar {
-  width: 10px;
-}
-.favoriteListWrapper::-webkit-scrollbar-track {
-  background-color: rgb(214, 209, 209);
-}
-.favoriteListWrapper::-webkit-scrollbar-thumb {
-  background-color: rgb(138, 136, 136);
-  border-radius: 100px;
-}
 
  @media (max-width: 1000px) {
       .favoriteCard .homePageCard {

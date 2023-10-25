@@ -33,19 +33,20 @@ body {
   margin: 6px 0;
   transform: 0.3s;
 }
-.navSiteName {
-  font-family: "bold";
-  font-size: 25px;
-  padding: 0px 0px 0px 8px;
-  text-decoration: none;
-  color: #3a9691;
-  text-shadow: -1px 0 rgb(136, 179, 151), 0 1px rgb(43, 70, 53),
-    1px 0 rgb(43, 70, 53), 0 -1px rgb(43, 70, 53);
-}
 .navTitle {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+
+.navSiteName {
+  font-family: "bold";
+  font-size: 25px;
+  padding: 0px 0px 0px 8px;
+  color: #3a9691;
+  text-shadow: -1px 0 rgb(136, 179, 151), 0 1px rgb(43, 70, 53),
+    1px 0 rgb(43, 70, 53), 0 -1px rgb(43, 70, 53);
 }
 .navPintedInfo {
   display: flex;
@@ -78,8 +79,7 @@ body {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-
-.sideNav{
+.sideNav {
   display: grid;
   grid-template-rows: 60px 50px 100px auto 100px;
   align-items: center;
@@ -96,7 +96,7 @@ body {
   z-index: 2;
   padding: 0px;
 }
-.siteNameSideBar{
+.siteNameSideBar {
   padding: 15px;
 }
 .sideLinkNav a {
@@ -177,7 +177,7 @@ body {
   background-color: #d8d0d0;
   height: 100%;
   width: 100%;
-  box-shadow:5px 5px 8px;
+  box-shadow: 5px 5px 8px;
 }
 
 @media (max-width: 1000px) {
@@ -190,6 +190,4 @@ body {
     gap: 10px;
     /* align-items: center; */
   }
-
-  
 }

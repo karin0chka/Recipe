@@ -1,0 +1,115 @@
+html,
+body {
+  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: auto;
+}
+
+.addRecipeForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  font-family: "Courier New", Courier, monospace;
+  overflow-y: auto;
+  height: 80vh;
+}
+.addRecipeForm::-webkit-scrollbar {
+  width: 10px;
+}
+
+.addRecipeForm::-webkit-scrollbar-track {
+  background-color: rgb(214, 209, 209);
+}
+
+.addRecipeForm::-webkit-scrollbar-thumb {
+  background-color: rgb(138, 136, 136);
+  border-radius: 100px;
+}
+.addRecipeForm .formTofile label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+}
+
+.addRecipeForm .formTofile input {
+  width: 400px;
+  border-radius: 10px;
+  border: 1px solid gray;
+}
+.addRecipeForm .formTofile textarea {
+  width: 400px;
+  height: 130px;
+  border-radius: 10px;
+  border: 1px solid gray;
+}
+.addRecipeForm .formTofile textarea::-webkit-scrollbar {
+  width: 10px;
+}
+.addRecipeForm .formTofile textarea::-webkit-scrollbar-track {
+  background-color: rgb(214, 209, 209);
+  border-radius: 100px;
+}
+.addRecipeForm .formTofile textarea::-webkit-scrollbar-thumb {
+  background-color: rgb(138, 136, 136);
+  border-radius: 100px;
+}
+.listOfIngredient .addIngredientBtn {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  border: none;
+  margin: 10px;
+  padding: 10px;
+  width: 30%;
+  border-radius: 15px;
+  box-shadow: rgba(225, 225, 231, 0.25) 0px 50px 100px -20px,
+    rgba(201, 198, 198, 0.3) 0px 30px 60px -30px,
+    rgba(193, 198, 202, 0.35) 0px -2px 6px 0px inset;
+}
+.listOfIngredient .displayIngredient .possibilityToDelIngr {
+  display: grid;
+  grid-template-columns: 90% 10%;
+  font-size: 20px;
+}
+.listOfIngredient .displayIngredient .possibilityToDelIngr .deleteIngrBtn {
+  background-color: white;
+  border: none;
+}
+.displayIngredient .deleteAllIngBtn{
+  color: red;
+  border:none;
+  background-color: white;
+  
+}
+
+.addRecipeForm .checkbox input {
+  margin: 5px;
+}
+.addRecipeForm .addRecipeSubmitBtn {
+  background-color: rgb(42, 115, 90);
+  color: aliceblue;
+  padding: 15px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 20px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(42, 39, 39, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  cursor: pointer;
+}
+
+.addRecipeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background-color: #f6f6f6;
+  width: 100%;
+  height: 7%;
+  border: none;
+  border-radius: 10px;
+}

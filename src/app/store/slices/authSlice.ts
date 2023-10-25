@@ -313,6 +313,7 @@ export const authSlice = createSlice({
       console.log(state)
     },
     addRecepie: (state, action) => {
+      console.log(action.payload)
       state.listOfResepies.push(action.payload);
     },
     addFavoriteRec: (state, action) => {

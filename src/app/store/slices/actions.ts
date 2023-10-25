@@ -19,6 +19,7 @@ export const registerUser = createAction("auth/registerUser", (userDto) => {
 export const addRecepie = createAction(
   "auth/addRecepi",
   (img, title, description, ingridients) => {
+    console.log("recipe added")
     return { payload: { img, title, description, ingridients } };
   }
 );
@@ -118,6 +119,7 @@ export const addRecepieLogic = (
         newRecepi.ingridients
       )
     );
+    console.log(newRecepi)
   };
 };
 

@@ -39,7 +39,7 @@ export default function RecepieCard(props: { recepie: IRecepie }) {
             <div className="homePageCard">
                 <img src={props.recepie.img} className="recepieImg" />
                 <section className="likeRec">
-                    <h2>{props.recepie.title}</h2>
+                    <h2 className="recepieTitle">{props.recepie.title}</h2>
                     {
                         user &&
                         <div className="heartPlacement">
