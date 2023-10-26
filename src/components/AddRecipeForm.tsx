@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, } from 'react'
+import { nanoid } from '@reduxjs/toolkit';
 import { useAppDispatch } from '../app/hooks';
 import { useNavigate } from 'react-router-dom'
-import { addRecepieLogic } from '../app/store/slices/actions';
+import { addRecepieToMyRecipePage, addRecepieToTheHomePage } from '../app/store/slices/authSlice';
 import './addRecipe.css'
+import { IRecepie } from '../interfaces/interfaces';
+
 
 
 export default function AddRecipeForm() {
@@ -11,21 +14,43 @@ export default function AddRecipeForm() {
     const [description, setDescription] = useState<string>('')
     const [list, setList] = useState<string[]>([]);
     const [ingredient, setIngredient] = useState<string>('')
+    const [isChecked, setIsChecked] = useState(false);
 
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
 
+
+
     async function handleFormSubmition(e: React.FormEvent) {
         e.preventDefault()
-        let newRecipe = await dispatch(addRecepieLogic(title, photoLink, description, list));
-        console.log(newRecipe)
-        if (title.trim(), photoLink.trim(), description.trim() !== '' && list.length > 0) {
+
+        if (title.trim(), photoLink.trim(), description.trim() !== '' && list.length > 0 && isChecked===true) {
             alert("Thank you for sharing your recipe with us!")
+            const newRecepi: IRecepie = {
+                id: nanoid(),
+                title: title,
+                img: photoLink,
+                description: description,
+                ingredients: list,
+            };
+            let newRecipe = dispatch(addRecepieToTheHomePage(newRecepi));
+            console.log(newRecipe)
             navigate("/")
+        } else if (title.trim(), photoLink.trim(), description.trim() !== '' && list.length > 0 && isChecked===false) {
+            const myRecepi: IRecepie = {
+                id: nanoid(),
+                title: title,
+                img: photoLink,
+                description: description,
+                ingredients: list,
+            };
+            dispatch(addRecepieToMyRecipePage(myRecepi))
+            navigate("/myrecipe")
         } else {
             alert("Please fill all the fields")
         }
+
     }
 
 
@@ -37,13 +62,20 @@ export default function AddRecipeForm() {
     }
 
     function handleDelete(index: number) {
+        console.log(index)
         let updatedList = list.filter((_, i) => i !== index);
+        console.log(updatedList)
         setList(updatedList)
     }
 
     function handleDeleteOfAllIng() {
-
+        setList([]);
     }
+
+    const handleOnChange = () => {
+        setIsChecked(!isChecked);
+    };
+
 
     return (
         <>
@@ -79,7 +111,7 @@ export default function AddRecipeForm() {
                         <ul className='displayIngredient'>
                             {list.map((item, index) => (
 
-                                <div className='possibilityToDelIngr' key={index + "ingredient"}>
+                                <div className='possibilityToDelIngr' key={nanoid()}>
                                     <li >{item}</li>
                                     <button className='deleteIngrBtn' onClick={() => handleDelete(index)}>x</button>
                                 </div>
@@ -87,12 +119,14 @@ export default function AddRecipeForm() {
 
 
                             ))}
-                            {/* <button className='deleteAllIngBtn' onClick={handleDeleteOfAllIng}>Delete all added ingredient</button> */}
+                            <button className='deleteAllIngBtn' onClick={handleDeleteOfAllIng}>Delete all added ingredient</button>
                         </ul>
                     </section>
                 </div>
                 <label className='checkbox'>
-                    <input type="checkbox" />
+                    <input type="checkbox"
+                        checked={isChecked}
+                        onChange={handleOnChange} />
                     Make it available for all users
                 </label>
                 <br />

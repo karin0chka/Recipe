@@ -9,7 +9,7 @@ import AddRecipe from "../components/AddRecipe"
 
 export default function Homepage() {
     const recipe = useSelector(selectListOfRecipes)
-
+    console.log(recipe)
     return (
         <>
         <AddRecipe />

@@ -9,6 +9,7 @@ import FavoriteRec from './pages/FavoriteRec';
 import Logout from './pages/Logout';
 import AddRecipeForm from './components/AddRecipeForm';
 import "bootstrap/dist/css/bootstrap.min.css";
+import MyRecipe from './components/MyRecipe';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/register" element={<Registration />} />
         <Route path="/favorite" element={<FavoriteRec />} />
         <Route path="/addrecipe" element={<AddRecipeForm />} />
+        <Route path="/myrecipe" element={<MyRecipe />} />
       </Routes>
 
     </>

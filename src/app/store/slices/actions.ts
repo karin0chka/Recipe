@@ -18,11 +18,17 @@ export const registerUser = createAction("auth/registerUser", (userDto) => {
 });
 export const addRecepie = createAction(
   "auth/addRecepi",
-  (img, title, description, ingridients) => {
-    console.log("recipe added")
-    return { payload: { img, title, description, ingridients } };
+  (title, img, description, ingredients) => {
+    return { payload: { title, img, description, ingredients } };
   }
 );
+export const addRecepieToMyRecipePage = createAction(
+  "auth/addRecepieToMyRecipePage",
+  (title, img, description, ingredients) => {
+    return { payload: { title, img, description, ingredients } };
+  }
+);
+
 export const loadFromLocal = createAction("auth/loadFromLocal", () => {
   return { payload: {} };
 });
@@ -85,6 +91,7 @@ export const registerUserLogic = (
       password: password,
       email: email,
       favorite: [],
+      myRecipe: [],
       type: "client",
     };
     console.log(userDto);
@@ -92,36 +99,36 @@ export const registerUserLogic = (
   };
 };
 
-export const addRecepieLogic = (
-  img: string,
-  title: string,
-  description: string,
-  ingridients: string[]
-) => {
-  return async (dispatch: AppDispatch, getState: () => RootState) => {
-    const state = getState();
-    let id = "";
-    do {
-      id = nanoid();
-    } while (state.listOfResepies.find((res) => res.id === id));
-    const newRecepi: IRecepie = {
-      id,
-      img: img,
-      title: title,
-      description: description,
-      ingridients: ingridients,
-    };
-    dispatch(
-      addRecepie(
-        newRecepi.img,
-        newRecepi.title,
-        newRecepi.description,
-        newRecepi.ingridients
-      )
-    );
-    console.log(newRecepi)
-  };
-};
+// export const addRecepieLogic = (
+//   img: string,
+//   title: string,
+//   description: string,
+//   ingredients: string[]
+// ) => {
+//   return async (dispatch: AppDispatch, getState: () => RootState) => {
+//     const state = getState();
+//     let id = "";
+//     do {
+//       id = nanoid();
+//     } while (state.listOfResepies.find((res) => res.id === id));
+//     const newRecepi: IRecepie = {
+//       id,
+//       img: img,
+//       title: title,
+//       description: description,
+//       ingredients: ingredients,
+//     };
+//     dispatch(
+//       addRecepie(
+//         newRecepi.img,
+//         newRecepi.title,
+//         newRecepi.description,
+//         newRecepi.ingredients
+//       )
+//     );
+//     console.log(newRecepi)
+//   };
+// };
 
 export const addFavoriteRecLogic = (id: string, recipeId: string) => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {

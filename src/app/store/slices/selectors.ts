@@ -16,3 +16,7 @@ export const selectListOfRecipes = createSelector(
   (auth) => auth.listOfResepies
 );
 
+export const selectListOfUsersRecipes = createSelector(
+  selectAuthState,
+  (auth) => auth.listOfUsers
+)

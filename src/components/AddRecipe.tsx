@@ -1,13 +1,20 @@
 import React from "react"
 import { useNavigate } from 'react-router-dom'
 import "./addRecipe.css"
+import { useSelector } from "react-redux"
+import { selectAuthenticatedUser } from "../app/store/slices/selectors"
 
 export default function AddRecipe() {
 
     const navigate = useNavigate()
+    const user = useSelector(selectAuthenticatedUser)
 
     function goToAddResepieForm() {
-        navigate("/addrecipe")
+        if(user){
+            navigate("/addrecipe")
+        }else{
+            navigate("/login")
+        }
     }
 
    

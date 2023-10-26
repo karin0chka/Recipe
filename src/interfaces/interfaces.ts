@@ -4,6 +4,7 @@ export interface IUser {
   password: string;
   email: string;
   favorite: IRecepie["id"][];
+  myRecipe:IRecepie[];
   type: "client" | "admin";
 }
 
@@ -12,7 +13,7 @@ export interface IRecepie {
   img: string;
   title: string;
   description: string;
-  ingridients: string[];
+  ingredients: string[];
 }
 
 export interface IInitialStore {

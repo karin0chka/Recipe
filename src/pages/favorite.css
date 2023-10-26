@@ -9,6 +9,7 @@ body {
 }
 .favPageTitle {
     font-family: "Lucida Handwriting", cursive;
+    padding-top: 25px;
 }
 .favoriteListWrapper {
     display: flex;

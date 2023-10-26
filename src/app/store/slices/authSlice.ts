@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
-import { IInitialStore } from "../../../interfaces/interfaces";
+import { IInitialStore, IRecepie } from "../../../interfaces/interfaces";
 
 const initialState: IInitialStore = {
   listOfUsers: [
@@ -10,6 +10,7 @@ const initialState: IInitialStore = {
       password: "testing",
       email: "testing",
       favorite: [],
+      myRecipe: [],
       type: "client",
     },
   ],
@@ -17,11 +18,11 @@ const initialState: IInitialStore = {
   listOfResepies: [
     {
       id: nanoid(),
-      img: "https://food-images.files.bbci.co.uk/food/recipes/easy_spaghetti_bolognese_93639_16x9.jpg",
       title: "Spaghetti bolognese",
+      img: "https://food-images.files.bbci.co.uk/food/recipes/easy_spaghetti_bolognese_93639_16x9.jpg",
       description:
         "Spaghetti bolognese consists of spaghetti (long strings of pasta) with an Italian ragù (meat sauce) made with minced beef, bacon and tomatoes, served with Parmesan cheese. Spaghetti bolognese is one of the most popular pasta dishes eaten outside of Italy.",
-      ingridients: [
+      ingredients: [
         "1 tablespoon olive oil",
         "1 pound lean ground beef",
         "½ teaspoon salt",
@@ -39,239 +40,11 @@ const initialState: IInitialStore = {
     },
     {
       id: nanoid(),
-      img: "https://www.foodandwine.com/thmb/QJDtINY0W2okaAeIxyrBGa00gYQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Borscht-with-Buttermilk-and-Grated-Cucumber-FT-RECIPE0822-2000-15c400a9033a4e58bfbc4dfbb8ab0bd7.jpg",
       title: "Borscht with Buttermilk and Grated Cucumber",
+      img: "https://www.foodandwine.com/thmb/QJDtINY0W2okaAeIxyrBGa00gYQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Borscht-with-Buttermilk-and-Grated-Cucumber-FT-RECIPE0822-2000-15c400a9033a4e58bfbc4dfbb8ab0bd7.jpg",
       description:
         "Packed with fresh summer herbs, this chilled beet soup is bright, earthy, and doesn't require turning on your stove. Grated beets are quickly marinated in a pickle juice brine to mellow their earthiness before they are stirred together with grated cucumber and buttermilk for a crisp, cooling bite. The topping of quartered hard-cooked eggs, generous dollops of sour cream, and fresh herbs add textural interest, color, and heft as they help make each bowl a satisfying meal",
-      ingridients: [
-        "2 pounds peeled cooked red beets",
-        "½ cup dill pickle juice",
-        "2 tablespoons granulated sugar",
-        "1 tablespoon plus 2 teaspoons kosher salt, divided, plus more to taste",
-        "1 large cucumber (about 12 ounces), peeled, halved lengthwise, and seeded",
-        "1 cup cold water",
-        "½ cup chopped scallions (from 4 large scallions), plus more for garnish",
-        "¼ cup finely chopped fresh dill, plus more for garnish",
-        "1 tablespoon fresh lemon juice (from 1 lemon)",
-        "1 ½ teaspoons black pepper, plus more to taste",
-        "4 cups buttermilk",
-        "8 hard-cooked eggs, peeled and quartered lengthwise",
-        "1 cup sour cream",
-        "Chopped fresh herbs (such as chives or flat-leaf parsley), for serving",
-      ],
-    },
-    {
-      id: nanoid(),
-      img: "https://www.kingarthurbaking.com/sites/default/files/2023-03/light-and-crispy-pizza_0223.jpg",
-      title: "Pizza",
-      description:
-        "Pizza, dish of Italian origin consisting of a flattened disk of bread dough topped with some combination of olive oil, oregano, tomato, olives, mozzarella or other cheese, and many other ingredients, baked quickly—usually, in a commercial setting, using a wood-fired oven heated to a very high temperature—and served hot.",
-      ingridients: [
-        " 3/4 cup (188g) water, lukewarm",
-        "1 tablespoon (14g) olive oil",
-        "2 teaspoons King Arthur Pizza Dough Flavor, optional",
-        "1 teaspoon (6g) salt",
-        "2 cups (240g) King Arthur Unbleached All-Purpose Flour",
-        "3 tablespoons (28g) King Arthur Easy Roll Dough Improver, optional",
-        "1 1/2 teaspoons instant yeast",
-        "1 teaspoon baking powder",
-      ],
-    },
-    {
-      id: nanoid(),
-      img: "https://www.kingarthurbaking.com/sites/default/files/2023-03/light-and-crispy-pizza_0223.jpg",
-      title: "Pizza",
-      description:
-        "Pizza, dish of Italian origin consisting of a flattened disk of bread dough topped with some combination of olive oil, oregano, tomato, olives, mozzarella or other cheese, and many other ingredients, baked quickly—usually, in a commercial setting, using a wood-fired oven heated to a very high temperature—and served hot.",
-      ingridients: [
-        " 3/4 cup (188g) water, lukewarm",
-        "1 tablespoon (14g) olive oil",
-        "2 teaspoons King Arthur Pizza Dough Flavor, optional",
-        "1 teaspoon (6g) salt",
-        "2 cups (240g) King Arthur Unbleached All-Purpose Flour",
-        "3 tablespoons (28g) King Arthur Easy Roll Dough Improver, optional",
-        "1 1/2 teaspoons instant yeast",
-        "1 teaspoon baking powder",
-      ],
-    },
-    {
-      id: nanoid(),
-      img: "https://www.foodandwine.com/thmb/QJDtINY0W2okaAeIxyrBGa00gYQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Borscht-with-Buttermilk-and-Grated-Cucumber-FT-RECIPE0822-2000-15c400a9033a4e58bfbc4dfbb8ab0bd7.jpg",
-      title: "Borscht with Buttermilk and Grated Cucumber",
-      description:
-        "Packed with fresh summer herbs, this chilled beet soup is bright, earthy, and doesn't require turning on your stove. Grated beets are quickly marinated in a pickle juice brine to mellow their earthiness before they are stirred together with grated cucumber and buttermilk for a crisp, cooling bite. The topping of quartered hard-cooked eggs, generous dollops of sour cream, and fresh herbs add textural interest, color, and heft as they help make each bowl a satisfying meal",
-      ingridients: [
-        "2 pounds peeled cooked red beets",
-        "½ cup dill pickle juice",
-        "2 tablespoons granulated sugar",
-        "1 tablespoon plus 2 teaspoons kosher salt, divided, plus more to taste",
-        "1 large cucumber (about 12 ounces), peeled, halved lengthwise, and seeded",
-        "1 cup cold water",
-        "½ cup chopped scallions (from 4 large scallions), plus more for garnish",
-        "¼ cup finely chopped fresh dill, plus more for garnish",
-        "1 tablespoon fresh lemon juice (from 1 lemon)",
-        "1 ½ teaspoons black pepper, plus more to taste",
-        "4 cups buttermilk",
-        "8 hard-cooked eggs, peeled and quartered lengthwise",
-        "1 cup sour cream",
-        "Chopped fresh herbs (such as chives or flat-leaf parsley), for serving",
-      ],
-    },
-    {
-      id: nanoid(),
-      img: "https://www.kingarthurbaking.com/sites/default/files/2023-03/light-and-crispy-pizza_0223.jpg",
-      title: "Pizza",
-      description:
-        "Pizza, dish of Italian origin consisting of a flattened disk of bread dough topped with some combination of olive oil, oregano, tomato, olives, mozzarella or other cheese, and many other ingredients, baked quickly—usually, in a commercial setting, using a wood-fired oven heated to a very high temperature—and served hot.",
-      ingridients: [
-        " 3/4 cup (188g) water, lukewarm",
-        "1 tablespoon (14g) olive oil",
-        "2 teaspoons King Arthur Pizza Dough Flavor, optional",
-        "1 teaspoon (6g) salt",
-        "2 cups (240g) King Arthur Unbleached All-Purpose Flour",
-        "3 tablespoons (28g) King Arthur Easy Roll Dough Improver, optional",
-        "1 1/2 teaspoons instant yeast",
-        "1 teaspoon baking powder",
-      ],
-    },
-    {
-      id: nanoid(),
-      img: "https://www.kingarthurbaking.com/sites/default/files/2023-03/light-and-crispy-pizza_0223.jpg",
-      title: "Pizza",
-      description:
-        "Pizza, dish of Italian origin consisting of a flattened disk of bread dough topped with some combination of olive oil, oregano, tomato, olives, mozzarella or other cheese, and many other ingredients, baked quickly—usually, in a commercial setting, using a wood-fired oven heated to a very high temperature—and served hot.",
-      ingridients: [
-        " 3/4 cup (188g) water, lukewarm",
-        "1 tablespoon (14g) olive oil",
-        "2 teaspoons King Arthur Pizza Dough Flavor, optional",
-        "1 teaspoon (6g) salt",
-        "2 cups (240g) King Arthur Unbleached All-Purpose Flour",
-        "3 tablespoons (28g) King Arthur Easy Roll Dough Improver, optional",
-        "1 1/2 teaspoons instant yeast",
-        "1 teaspoon baking powder",
-      ],
-    },
-    {
-      id: nanoid(),
-      img: "https://www.foodandwine.com/thmb/QJDtINY0W2okaAeIxyrBGa00gYQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Borscht-with-Buttermilk-and-Grated-Cucumber-FT-RECIPE0822-2000-15c400a9033a4e58bfbc4dfbb8ab0bd7.jpg",
-      title: "Borscht with Buttermilk and Grated Cucumber",
-      description:
-        "Packed with fresh summer herbs, this chilled beet soup is bright, earthy, and doesn't require turning on your stove. Grated beets are quickly marinated in a pickle juice brine to mellow their earthiness before they are stirred together with grated cucumber and buttermilk for a crisp, cooling bite. The topping of quartered hard-cooked eggs, generous dollops of sour cream, and fresh herbs add textural interest, color, and heft as they help make each bowl a satisfying meal",
-      ingridients: [
-        "2 pounds peeled cooked red beets",
-        "½ cup dill pickle juice",
-        "2 tablespoons granulated sugar",
-        "1 tablespoon plus 2 teaspoons kosher salt, divided, plus more to taste",
-        "1 large cucumber (about 12 ounces), peeled, halved lengthwise, and seeded",
-        "1 cup cold water",
-        "½ cup chopped scallions (from 4 large scallions), plus more for garnish",
-        "¼ cup finely chopped fresh dill, plus more for garnish",
-        "1 tablespoon fresh lemon juice (from 1 lemon)",
-        "1 ½ teaspoons black pepper, plus more to taste",
-        "4 cups buttermilk",
-        "8 hard-cooked eggs, peeled and quartered lengthwise",
-        "1 cup sour cream",
-        "Chopped fresh herbs (such as chives or flat-leaf parsley), for serving",
-      ],
-    },
-    {
-      id: nanoid(),
-      img: "https://www.kingarthurbaking.com/sites/default/files/2023-03/light-and-crispy-pizza_0223.jpg",
-      title: "Pizza",
-      description:
-        "Pizza, dish of Italian origin consisting of a flattened disk of bread dough topped with some combination of olive oil, oregano, tomato, olives, mozzarella or other cheese, and many other ingredients, baked quickly—usually, in a commercial setting, using a wood-fired oven heated to a very high temperature—and served hot.",
-      ingridients: [
-        " 3/4 cup (188g) water, lukewarm",
-        "1 tablespoon (14g) olive oil",
-        "2 teaspoons King Arthur Pizza Dough Flavor, optional",
-        "1 teaspoon (6g) salt",
-        "2 cups (240g) King Arthur Unbleached All-Purpose Flour",
-        "3 tablespoons (28g) King Arthur Easy Roll Dough Improver, optional",
-        "1 1/2 teaspoons instant yeast",
-        "1 teaspoon baking powder",
-      ],
-    },
-    {
-      id: nanoid(),
-      img: "https://www.kingarthurbaking.com/sites/default/files/2023-03/light-and-crispy-pizza_0223.jpg",
-      title: "Pizza",
-      description:
-        "Pizza, dish of Italian origin consisting of a flattened disk of bread dough topped with some combination of olive oil, oregano, tomato, olives, mozzarella or other cheese, and many other ingredients, baked quickly—usually, in a commercial setting, using a wood-fired oven heated to a very high temperature—and served hot.",
-      ingridients: [
-        " 3/4 cup (188g) water, lukewarm",
-        "1 tablespoon (14g) olive oil",
-        "2 teaspoons King Arthur Pizza Dough Flavor, optional",
-        "1 teaspoon (6g) salt",
-        "2 cups (240g) King Arthur Unbleached All-Purpose Flour",
-        "3 tablespoons (28g) King Arthur Easy Roll Dough Improver, optional",
-        "1 1/2 teaspoons instant yeast",
-        "1 teaspoon baking powder",
-      ],
-    },
-    {
-      id: nanoid(),
-      img: "https://www.foodandwine.com/thmb/QJDtINY0W2okaAeIxyrBGa00gYQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Borscht-with-Buttermilk-and-Grated-Cucumber-FT-RECIPE0822-2000-15c400a9033a4e58bfbc4dfbb8ab0bd7.jpg",
-      title: "Borscht with Buttermilk and Grated Cucumber",
-      description:
-        "Packed with fresh summer herbs, this chilled beet soup is bright, earthy, and doesn't require turning on your stove. Grated beets are quickly marinated in a pickle juice brine to mellow their earthiness before they are stirred together with grated cucumber and buttermilk for a crisp, cooling bite. The topping of quartered hard-cooked eggs, generous dollops of sour cream, and fresh herbs add textural interest, color, and heft as they help make each bowl a satisfying meal",
-      ingridients: [
-        "2 pounds peeled cooked red beets",
-        "½ cup dill pickle juice",
-        "2 tablespoons granulated sugar",
-        "1 tablespoon plus 2 teaspoons kosher salt, divided, plus more to taste",
-        "1 large cucumber (about 12 ounces), peeled, halved lengthwise, and seeded",
-        "1 cup cold water",
-        "½ cup chopped scallions (from 4 large scallions), plus more for garnish",
-        "¼ cup finely chopped fresh dill, plus more for garnish",
-        "1 tablespoon fresh lemon juice (from 1 lemon)",
-        "1 ½ teaspoons black pepper, plus more to taste",
-        "4 cups buttermilk",
-        "8 hard-cooked eggs, peeled and quartered lengthwise",
-        "1 cup sour cream",
-        "Chopped fresh herbs (such as chives or flat-leaf parsley), for serving",
-      ],
-    },
-    {
-      id: nanoid(),
-      img: "https://www.kingarthurbaking.com/sites/default/files/2023-03/light-and-crispy-pizza_0223.jpg",
-      title: "Pizza",
-      description:
-        "Pizza, dish of Italian origin consisting of a flattened disk of bread dough topped with some combination of olive oil, oregano, tomato, olives, mozzarella or other cheese, and many other ingredients, baked quickly—usually, in a commercial setting, using a wood-fired oven heated to a very high temperature—and served hot.",
-      ingridients: [
-        " 3/4 cup (188g) water, lukewarm",
-        "1 tablespoon (14g) olive oil",
-        "2 teaspoons King Arthur Pizza Dough Flavor, optional",
-        "1 teaspoon (6g) salt",
-        "2 cups (240g) King Arthur Unbleached All-Purpose Flour",
-        "3 tablespoons (28g) King Arthur Easy Roll Dough Improver, optional",
-        "1 1/2 teaspoons instant yeast",
-        "1 teaspoon baking powder",
-      ],
-    },
-    {
-      id: nanoid(),
-      img: "https://www.kingarthurbaking.com/sites/default/files/2023-03/light-and-crispy-pizza_0223.jpg",
-      title: "Pizza",
-      description:
-        "Pizza, dish of Italian origin consisting of a flattened disk of bread dough topped with some combination of olive oil, oregano, tomato, olives, mozzarella or other cheese, and many other ingredients, baked quickly—usually, in a commercial setting, using a wood-fired oven heated to a very high temperature—and served hot.",
-      ingridients: [
-        " 3/4 cup (188g) water, lukewarm",
-        "1 tablespoon (14g) olive oil",
-        "2 teaspoons King Arthur Pizza Dough Flavor, optional",
-        "1 teaspoon (6g) salt",
-        "2 cups (240g) King Arthur Unbleached All-Purpose Flour",
-        "3 tablespoons (28g) King Arthur Easy Roll Dough Improver, optional",
-        "1 1/2 teaspoons instant yeast",
-        "1 teaspoon baking powder",
-      ],
-    },
-    {
-      id: nanoid(),
-      img: "https://www.foodandwine.com/thmb/QJDtINY0W2okaAeIxyrBGa00gYQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Borscht-with-Buttermilk-and-Grated-Cucumber-FT-RECIPE0822-2000-15c400a9033a4e58bfbc4dfbb8ab0bd7.jpg",
-      title: "Borscht with Buttermilk and Grated Cucumber",
-      description:
-        "Packed with fresh summer herbs, this chilled beet soup is bright, earthy, and doesn't require turning on your stove. Grated beets are quickly marinated in a pickle juice brine to mellow their earthiness before they are stirred together with grated cucumber and buttermilk for a crisp, cooling bite. The topping of quartered hard-cooked eggs, generous dollops of sour cream, and fresh herbs add textural interest, color, and heft as they help make each bowl a satisfying meal",
-      ingridients: [
+      ingredients: [
         "2 pounds peeled cooked red beets",
         "½ cup dill pickle juice",
         "2 tablespoons granulated sugar",
@@ -300,22 +73,54 @@ export const authSlice = createSlice({
       state.isAuthenticated = null;
     },
     loginUserSuccess: (state, action) => {
-      console.log("login");
+      // console.log("login");
       state.isAuthenticated = action.payload;
     },
     logoutUser: (state) => {
       state.isAuthenticated = null;
     },
     registerUser: (state, action) => {
-      console.log("user is register",action.payload);
-      state.listOfUsers.push(action.payload)
-      state.isAuthenticated = action.payload
-      console.log(state)
+      console.log("user is register", action.payload);
+      state.listOfUsers.push(action.payload);
+      state.isAuthenticated = action.payload;
+      console.log(state);
     },
-    addRecepie: (state, action) => {
-      console.log(action.payload)
-      state.listOfResepies.push(action.payload);
+    addRecepieToTheHomePage: (state, action) => {
+      const { title, img, description, ingredients } = action.payload;
+      if(state.isAuthenticated !== null){
+        let id = "";
+        do {
+          id = nanoid();
+        } while (state.listOfResepies.find((res) => res.id === id));
+        const newRecepi: IRecepie = {
+          id,
+          img,
+          title,
+          description,
+          ingredients,
+        };
+        state.listOfResepies.push(newRecepi);
+      }
     },
+    addRecepieToMyRecipePage: (state, action) => {
+      const { title, img, description, ingredients } = action.payload;
+      if(state.isAuthenticated !== null){
+        let id = "";
+        do {
+          id = nanoid();
+        } while (state.isAuthenticated.myRecipe.find((res) => res.id === id));
+        const newRecepi:IRecepie = {
+          id,
+          img,
+          title,
+          description,
+          ingredients,
+        };
+        state.isAuthenticated.myRecipe.push(newRecepi);
+        console.log(state.isAuthenticated.myRecipe)
+      }
+    },
+
     addFavoriteRec: (state, action) => {
       console.log("reducer added");
       const { id, recipeId } = action.payload;
@@ -346,7 +151,8 @@ export const {
   loginUserFailure,
   loginUserSuccess,
   registerUser,
-  addRecepie,
+  addRecepieToTheHomePage,
+  addRecepieToMyRecipePage,
   addFavoriteRec,
   deleteFavoriteRec,
 } = authSlice.actions;

@@ -1,12 +1,11 @@
 import React, { useState } from "react"
 import { IRecepie } from "../interfaces/interfaces"
 import "./recepieCard.css"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { selectAuthenticatedUser } from "../app/store/slices/selectors"
-import { addFavoriteRec, addFavoriteRecLogic, deleteFavoriteRecLogic, } from "../app/store/slices/actions"
-import { deleteFavoriteRec } from "../app/store/slices/actions"
+import { addFavoriteRecLogic, deleteFavoriteRecLogic, } from "../app/store/slices/actions"
 import { useAppDispatch } from "../app/hooks"
-import AddRecipe from "../components/AddRecipe"
+
 
 
 export default function RecepieCard(props: { recepie: IRecepie }) {
@@ -51,7 +50,7 @@ export default function RecepieCard(props: { recepie: IRecepie }) {
                     <ul className={`ingridientsList ${showMore ? 'expanded' : ''}`}>
                         <p>{props.recepie.description}</p>
                         <em>Ingridients</em>
-                        {props.recepie.ingridients.map((ing, i) =>
+                        {props.recepie.ingredients.map((ing, i) =>
                             <li key={ing + i}>{ing}</li>
                         )}
                     </ul>

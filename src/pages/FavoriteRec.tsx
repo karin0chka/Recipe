@@ -15,8 +15,7 @@ export default function FavoriteRec() {
 
         <div className="favoriteListWrapper">
             <h1 className="favPageTitle">
-            <img height="90" width="100" src="/public/icons/fav-icon.png" />
-            <br />
+            
             My recipes
             </h1>
             {
