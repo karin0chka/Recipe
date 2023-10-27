@@ -34,8 +34,7 @@ export default function AddRecipeForm() {
                 description: description,
                 ingredients: list,
             };
-            let newRecipe = dispatch(addRecepieToTheHomePage(newRecepi));
-            console.log(newRecipe)
+            dispatch(addRecepieToTheHomePage(newRecepi));
             navigate("/")
         } else if (title.trim(), photoLink.trim(), description.trim() !== '' && list.length > 0 && isChecked===false) {
             const myRecepi: IRecepie = {

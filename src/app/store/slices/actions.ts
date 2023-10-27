@@ -4,20 +4,25 @@ import { RootState } from "../../store";
 import { IRecepie, IUser } from "../../../interfaces/interfaces";
 import { nanoid } from "nanoid";
 
-export const loginUserSuccess = createAction<IUser | undefined>(
-  "auth/loginUserSuccess"
-);
-export const loginUserFailure = createAction<string | undefined>(
-  "auth/loginUserFailure"
+export const loadFromLocal = createAction("auth/loadFromLocal", () => {
+  return { payload: {} };
+});
+export const loginUser = createAction(
+  "auth/loginUser",
+  (user: { email: string; password: string }) => ({
+    payload: user,
+  })
 );
 
 export const logoutUser = createAction("auth/logoutUser");
-export const registerUser = createAction("auth/registerUser", (userDto) => {
-  console.log("reg");
-  return { payload: userDto };
-});
-export const addRecepie = createAction(
-  "auth/addRecepi",
+export const registerUser = createAction(
+  "auth/registerUser",
+  (username, email, password) => {
+    return { payload: { username, email, password } };
+  }
+);
+export const addRecepieToTheHomePage = createAction(
+  "auth/addRecepieToTheHomePage",
   (title, img, description, ingredients) => {
     return { payload: { title, img, description, ingredients } };
   }
@@ -29,43 +34,37 @@ export const addRecepieToMyRecipePage = createAction(
   }
 );
 
-export const loadFromLocal = createAction("auth/loadFromLocal", () => {
-  return { payload: {} };
-});
 export const addFavoriteRec = createAction(
   "auth/addFavoriteRec",
   (id, recipeId) => {
-    console.log("added");
     return { payload: { id, recipeId } };
   }
 );
 export const deleteFavoriteRec = createAction(
   "auth/deleteFavoriteRec",
   (id, recipeId) => {
-    console.log("actionDel");
     return { payload: { id, recipeId } };
   }
 );
 
 //Action logic
 
-export const loginUserlogic = (email: string, password: string) => {
-  return async (dispatch: AppDispatch, getState: () => RootState) => {
-    const state = getState(); // Cast getState() to RootState
-    const user = state.listOfUsers.find(
-      (user) => user.email.toLowerCase() === email.toLowerCase()
-    );
-    console.log(user);
-    if (!user) {
-      dispatch(loginUserFailure()); // Throw an error for handling in the "rejected" action
-    } else if (user.password !== password) {
-      dispatch(loginUserFailure()); // Throw an error for handling in the "rejected" action
-    } else {
-      dispatch(loginUserSuccess(user)); // Return the user data when the login is successful
-    }
-    return user;
-  };
-};
+// export const loginUserlogic = (email: string, password: string) => {
+//   return async (dispatch: AppDispatch, getState: () => RootState) => {
+//     const state = getState(); // Cast getState() to RootState
+//     const user = state.listOfUsers.find(
+//       (user) => user.email.toLowerCase() === email.toLowerCase()
+//     );
+//     if (!user) {
+//       dispatch(loginUserFailure()); // Throw an error for handling in the "rejected" action
+//     } else if (user.password !== password) {
+//       dispatch(loginUserFailure()); // Throw an error for handling in the "rejected" action
+//     } else {
+//       dispatch(loginUserSuccess(user)); // Return the user data when the login is successful
+//     }
+//     return user;
+//   };
+// };
 
 export const registerUserLogic = (
   username: string,
@@ -94,8 +93,7 @@ export const registerUserLogic = (
       myRecipe: [],
       type: "client",
     };
-    console.log(userDto);
-    dispatch(registerUser(userDto));
+    
   };
 };
 
@@ -141,7 +139,6 @@ export const addFavoriteRecLogic = (id: string, recipeId: string) => {
         findRecipe &&
         !state.listOfUsers[userIndex].favorite.includes(findRecipe.id)
       ) {
-        console.log("ses added");
         dispatch(addFavoriteRec(id, recipeId));
       }
     }
@@ -161,7 +158,6 @@ export const deleteFavoriteRecLogic = (id: string, recipeId: string) => {
         recipeIndex >= 0 &&
         state.listOfUsers[userIndex].favorite.includes(recipeId)
       ) {
-        console.log("deleted");
         dispatch(deleteFavoriteRec(id, recipeId));
       }
   };

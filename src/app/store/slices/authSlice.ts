@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
-import { IInitialStore, IRecepie } from "../../../interfaces/interfaces";
+import { IInitialStore, IRecepie, IUser } from "../../../interfaces/interfaces";
 
 const initialState: IInitialStore = {
   listOfUsers: [
@@ -68,61 +68,82 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    loginUserFailure: (state) => {
-      console.log("dont login");
-      state.isAuthenticated = null;
-    },
-    loginUserSuccess: (state, action) => {
-      // console.log("login");
-      state.isAuthenticated = action.payload;
+    loginUser: (state, action) => {
+      const { email, password } = action.payload;
+      const user = state.listOfUsers.find(
+        (user) => user.email.toLowerCase() === email.toLowerCase()
+      );
+      if (!user) {
+        state.isAuthenticated = null;
+        console.log("did not login");
+      } else if (user.password !== password) {
+        state.isAuthenticated = null;
+        console.log("did not login");
+      } else {
+        state.isAuthenticated = action.payload;
+        console.log("login");
+      }
     },
     logoutUser: (state) => {
       state.isAuthenticated = null;
     },
     registerUser: (state, action) => {
-      console.log("user is register", action.payload);
+      const { username, email, password } = action.payload;
+      const registerNewEmail = state.listOfUsers.find(
+        (newUser) => newUser.email.toLowerCase() !== email.toLowerCase()
+      );
+      if (!registerNewEmail) return;
+
+      let id = "";
+      do {
+        id = nanoid();
+      } while (state.listOfUsers.find((u) => u.id === id));
+
+      
       state.listOfUsers.push(action.payload);
       state.isAuthenticated = action.payload;
-      console.log(state);
     },
-    addRecepieToTheHomePage: (state, action) => {
-      const { title, img, description, ingredients } = action.payload;
-      if(state.isAuthenticated !== null){
+    addRecepieToTheHomePage: (state, action: PayloadAction<IRecepie>) => {
+      if (state.isAuthenticated !== null) {
         let id = "";
         do {
           id = nanoid();
         } while (state.listOfResepies.find((res) => res.id === id));
         const newRecepi: IRecepie = {
           id,
-          img,
-          title,
-          description,
-          ingredients,
+          img: action.payload.img,
+          title: action.payload.title,
+          description: action.payload.description,
+          ingredients: action.payload.ingredients,
         };
         state.listOfResepies.push(newRecepi);
       }
     },
-    addRecepieToMyRecipePage: (state, action) => {
-      const { title, img, description, ingredients } = action.payload;
-      if(state.isAuthenticated !== null){
-        let id = "";
-        do {
-          id = nanoid();
-        } while (state.isAuthenticated.myRecipe.find((res) => res.id === id));
-        const newRecepi:IRecepie = {
-          id,
-          img,
-          title,
-          description,
-          ingredients,
-        };
-        state.isAuthenticated.myRecipe.push(newRecepi);
-        console.log(state.isAuthenticated.myRecipe)
+    addRecepieToMyRecipePage: (state, action: PayloadAction<IRecepie>) => {
+      console.log("recipeAddedToMyRecPage");
+      if (state.isAuthenticated !== null) {
+        const userIndex = state.listOfUsers.findIndex(
+          (user) => user.id === state.isAuthenticated?.id
+        );
+        console.log(userIndex);
+
+        if (userIndex > -1) {
+          const id = nanoid();
+          const newRecepi: IRecepie = {
+            id,
+            img: action.payload.img,
+            title: action.payload.title,
+            description: action.payload.description,
+            ingredients: action.payload.ingredients,
+          };
+
+          state.listOfUsers[userIndex].myRecipe.push(newRecepi);
+          console.log(state.listOfUsers[userIndex].myRecipe);
+        }
       }
     },
 
     addFavoriteRec: (state, action) => {
-      console.log("reducer added");
       const { id, recipeId } = action.payload;
       const userIndex = state.listOfUsers.findIndex((u) => u.id === id);
       if (state.isAuthenticated !== null && userIndex >= 0) {
@@ -131,7 +152,6 @@ export const authSlice = createSlice({
       }
     },
     deleteFavoriteRec: (state, action) => {
-      console.log("asd", action.payload);
       const { id, recipeId } = action.payload;
       const userIndex = state.listOfUsers.findIndex((u) => u.id === id);
       const recipeIndex = state.listOfResepies.findIndex(
@@ -148,8 +168,7 @@ export const authSlice = createSlice({
   },
 });
 export const {
-  loginUserFailure,
-  loginUserSuccess,
+  loginUser,
   registerUser,
   addRecepieToTheHomePage,
   addRecepieToMyRecipePage,

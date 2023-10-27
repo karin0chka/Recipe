@@ -10,7 +10,6 @@ export default function FavoriteRec() {
     const user = useSelector(selectAuthenticatedUser)
     const listOfRecipes = useSelector(selectListOfRecipes)
      const listOfFavorites = useMemo(() => listOfRecipes.filter((recp) => user?.favorite.includes(recp.id)), [user?.favorite, listOfRecipes])
-     console.log(listOfFavorites)
     return (
 
         <div className="favoriteListWrapper">

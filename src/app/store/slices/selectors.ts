@@ -10,6 +10,12 @@ export const selectAuthenticatedUser = createSelector(
   (auth) => auth.isAuthenticated
 );
 
+export const selectlistOfUsers = createSelector(
+  selectAuthState,
+  (auth) => auth.listOfUsers
+
+)
+
 // Create a selector to get the list of recipes
 export const selectListOfRecipes = createSelector(
   selectAuthState,
@@ -18,5 +24,10 @@ export const selectListOfRecipes = createSelector(
 
 export const selectListOfUsersRecipes = createSelector(
   selectAuthState,
-  (auth) => auth.listOfUsers
+  (auth) => {
+    const userIndex = auth.listOfUsers.findIndex(
+      (user) => user.id === auth.isAuthenticated?.id
+    );
+    return auth.listOfUsers[userIndex].myRecipe
+  }
 )
