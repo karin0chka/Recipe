@@ -4,7 +4,7 @@ import { useAppDispatch } from '../app/hooks'
 import { loginUser } from '../app/store/slices/authSlice'
 import './login.css'
 import { useSelector } from 'react-redux'
-import {selectlistOfUsers } from '../app/store/slices/selectors'
+import { selectlistOfUsers } from '../app/store/slices/selectors'
 
 
 // dispatch is the fundamental method of updaiting a Redux store state
@@ -21,7 +21,7 @@ export default function Login() {
 
     async function handleLogin(e: React.FormEvent) {
         e.preventDefault()
-        if (userData.find(user => user.email === email &&  user.password === password)) {
+        if (userData.find(user => user.email === email && user.password === password)) {
             dispatch(loginUser({ email, password }));
             navigate("/");
         } else {

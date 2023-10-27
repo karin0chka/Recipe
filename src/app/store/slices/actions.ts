@@ -1,8 +1,6 @@
-import { AppDispatch } from "./../../store";
-import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { RootState } from "../../store";
-import { IRecepie, IUser } from "../../../interfaces/interfaces";
-import { nanoid } from "nanoid";
+
+import { createAction } from "@reduxjs/toolkit";
+
 
 export const loadFromLocal = createAction("auth/loadFromLocal", () => {
   return { payload: {} };
@@ -36,15 +34,15 @@ export const addRecepieToMyRecipePage = createAction(
 
 export const addFavoriteRec = createAction(
   "auth/addFavoriteRec",
-  (id, recipeId) => {
-    return { payload: { id, recipeId } };
-  }
+  (recipe: { id: string; recipeId: string }) => ({
+    payload: recipe,
+  })
 );
 export const deleteFavoriteRec = createAction(
   "auth/deleteFavoriteRec",
-  (id, recipeId) => {
-    return { payload: { id, recipeId } };
-  }
+  ( updatedFavorite:{id:string, recipeId:string}) => ({
+     payload: updatedFavorite
+  })
 );
 
 //Action logic
@@ -66,36 +64,36 @@ export const deleteFavoriteRec = createAction(
 //   };
 // };
 
-export const registerUserLogic = (
-  username: string,
-  email: string,
-  password: string
-) => {
-  return async (dispatch: AppDispatch, getState: () => RootState) => {
-    const state = getState();
-    const registerNewEmail = state.listOfUsers.find(
-      (newUser) => newUser.email.toLowerCase() !== email.toLowerCase()
-    );
+// export const registerUserLogic = (
+//   username: string,
+//   email: string,
+//   password: string
+// ) => {
+//   return async (dispatch: AppDispatch, getState: () => RootState) => {
+//     const state = getState();
+//     const registerNewEmail = state.listOfUsers.find(
+//       (newUser) => newUser.email.toLowerCase() !== email.toLowerCase()
+//     );
 
-    if (!registerNewEmail) return;
+//     if (!registerNewEmail) return;
 
-    let id = "";
-    do {
-      id = nanoid();
-    } while (state.listOfUsers.find((u) => u.id === id));
+//     let id = "";
+//     do {
+//       id = nanoid();
+//     } while (state.listOfUsers.find((u) => u.id === id));
 
-    const userDto: IUser = {
-      id,
-      username: username,
-      password: password,
-      email: email,
-      favorite: [],
-      myRecipe: [],
-      type: "client",
-    };
-    
-  };
-};
+//     const userDto: IUser = {
+//       id,
+//       username: username,
+//       password: password,
+//       email: email,
+//       favorite: [],
+//       myRecipe: [],
+//       type: "client",
+//     };
+
+//   };
+// };
 
 // export const addRecepieLogic = (
 //   img: string,
@@ -128,37 +126,37 @@ export const registerUserLogic = (
 //   };
 // };
 
-export const addFavoriteRecLogic = (id: string, recipeId: string) => {
-  return async (dispatch: AppDispatch, getState: () => RootState) => {
-    const state = getState();
-    const userIndex = state.listOfUsers.findIndex((u) => u.id === id);
-    const findRecipe = state.listOfResepies.find((r) => r.id === recipeId);
-    if (state.isAuthenticated !== null) {
-      if (
-        userIndex >= 0 &&
-        findRecipe &&
-        !state.listOfUsers[userIndex].favorite.includes(findRecipe.id)
-      ) {
-        dispatch(addFavoriteRec(id, recipeId));
-      }
-    }
-  };
-};
+// export const addFavoriteRecLogic = (id: string, recipeId: string) => {
+//   return async (dispatch: AppDispatch, getState: () => RootState) => {
+//     const state = getState();
+//     const userIndex = state.listOfUsers.findIndex((u) => u.id === id);
+//     const findRecipe = state.listOfResepies.find((r) => r.id === recipeId);
+//     if (state.isAuthenticated !== null) {
+//       if (
+//         userIndex >= 0 &&
+//         findRecipe &&
+//         state.listOfUsers[userIndex].favorite.includes(findRecipe.id)
+//       ) {
+//         dispatch(addFavoriteRec(id, recipeId));
+//       }
+//     }
+//   };
+// };
 
-export const deleteFavoriteRecLogic = (id: string, recipeId: string) => {
-  return async (dispatch: AppDispatch, getState: () => RootState) => {
-    const state = getState();
-    const userIndex = state.listOfUsers.findIndex((u) => u.id === id);
-    const recipeIndex = state.listOfResepies.findIndex(
-      (r) => r.id === recipeId
-    );
-    if (state.isAuthenticated !== null)
-      if (
-        userIndex >= 0 &&
-        recipeIndex >= 0 &&
-        state.listOfUsers[userIndex].favorite.includes(recipeId)
-      ) {
-        dispatch(deleteFavoriteRec(id, recipeId));
-      }
-  };
-};
+// export const deleteFavoriteRecLogic = (id: string, recipeId: string) => {
+//   return async (dispatch: AppDispatch, getState: () => RootState) => {
+//     const state = getState();
+//     const userIndex = state.listOfUsers.findIndex((u) => u.id === id);
+//     const recipeIndex = state.listOfResepies.findIndex(
+//       (r) => r.id === recipeId
+//     );
+//     if (state.isAuthenticated !== null)
+//       if (
+//         userIndex >= 0 &&
+//         recipeIndex >= 0 &&
+//         state.listOfUsers[userIndex].favorite.includes(recipeId)
+//       ) {
+//         dispatch(deleteFavoriteRec(id, recipeId));
+//       }
+//   };
+// };

@@ -88,6 +88,7 @@ export const authSlice = createSlice({
       state.isAuthenticated = null;
     },
     registerUser: (state, action) => {
+      console.log("user is register");
       const { username, email, password } = action.payload;
       const registerNewEmail = state.listOfUsers.find(
         (newUser) => newUser.email.toLowerCase() !== email.toLowerCase()
@@ -99,8 +100,16 @@ export const authSlice = createSlice({
         id = nanoid();
       } while (state.listOfUsers.find((u) => u.id === id));
 
-      
-      state.listOfUsers.push(action.payload);
+      const userDto: IUser = {
+        id,
+        username: username,
+        password: password,
+        email: email,
+        favorite: [],
+        myRecipe: [],
+        type: "client",
+      };
+      state.listOfUsers.push(userDto);
       state.isAuthenticated = action.payload;
     },
     addRecepieToTheHomePage: (state, action: PayloadAction<IRecepie>) => {
@@ -144,26 +153,41 @@ export const authSlice = createSlice({
     },
 
     addFavoriteRec: (state, action) => {
+      console.log("added");
       const { id, recipeId } = action.payload;
       const userIndex = state.listOfUsers.findIndex((u) => u.id === id);
-      if (state.isAuthenticated !== null && userIndex >= 0) {
-        state.listOfUsers[userIndex].favorite.push(recipeId);
-        state.isAuthenticated.favorite.push(recipeId);
+      const findRecipe = state.listOfResepies.find((r) => r.id === recipeId);
+      if (state.isAuthenticated !== null) {
+        if (
+          userIndex >= 0 &&
+          findRecipe &&
+          !state.listOfUsers[userIndex].favorite.includes(findRecipe.id)
+        ) {
+          state.listOfUsers[userIndex].favorite.push(recipeId);
+          state.isAuthenticated.favorite.push(recipeId);
+        }
       }
     },
-    deleteFavoriteRec: (state, action) => {
+    deleteFavoriteRec: (state, action) => {  
+      console.log("deleted")
       const { id, recipeId } = action.payload;
       const userIndex = state.listOfUsers.findIndex((u) => u.id === id);
       const recipeIndex = state.listOfResepies.findIndex(
         (r) => r.id === recipeId
       );
-      const updatedFavorite = state.listOfUsers[userIndex].favorite.splice(
-        recipeIndex,
-        1
-      );
-      state.listOfUsers[userIndex].favorite = updatedFavorite;
-      if (state.isAuthenticated)
-        state.isAuthenticated.favorite = updatedFavorite;
+      if (state.isAuthenticated !== null)
+        if (
+          userIndex >= 0 &&
+          recipeIndex >= 0 &&
+          state.listOfUsers[userIndex].favorite.includes(recipeId)
+        ) {
+          const updatedFavorite = state.listOfUsers[userIndex].favorite.splice(
+            recipeIndex,
+            1
+          );
+          state.listOfUsers[userIndex].favorite = updatedFavorite;
+          state.isAuthenticated.favorite = updatedFavorite;
+        }
     },
   },
 });

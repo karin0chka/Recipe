@@ -3,8 +3,8 @@ import { IRecepie } from "../interfaces/interfaces"
 import "./recepieCard.css"
 import { useSelector } from "react-redux"
 import { selectAuthenticatedUser } from "../app/store/slices/selectors"
-import { addFavoriteRecLogic, deleteFavoriteRecLogic, } from "../app/store/slices/actions"
 import { useAppDispatch } from "../app/hooks"
+import { addFavoriteRec, deleteFavoriteRec } from "../app/store/slices/authSlice"
 
 
 
@@ -24,10 +24,13 @@ export default function RecepieCard(props: { recepie: IRecepie }) {
     function handeleFavorite() {
         if (!user) return
         const isRecipeInFavorites = user.favorite?.includes(props.recepie.id)
+
         if (!isRecipeInFavorites) {
-            dispatch(addFavoriteRecLogic(user.id, props.recepie.id))
-        } else {
-            dispatch(deleteFavoriteRecLogic(user.id, props.recepie.id))
+            dispatch(addFavoriteRec({ id: user.id, recipeId: props.recepie.id }));
+        } 
+        
+        if(isRecipeInFavorites) {
+            dispatch(deleteFavoriteRec({ id: user.id, recipeId: props.recepie.id }))
         }
     }
 
@@ -42,7 +45,7 @@ export default function RecepieCard(props: { recepie: IRecepie }) {
                     {
                         user &&
                         <div className="heartPlacement">
-                            <div className={`heartBut ${user.favorite?.includes(props.recepie.id) ? 'is-active' : ''}`} onClick={handeleFavorite}></div>
+                            <div className={`heartBut ${user.favorite.includes(props.recepie.id) ? 'is-active' : ''}`} onClick={handeleFavorite}></div>
                         </div>
                     }
                 </section>
